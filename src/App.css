@@ -211,3 +211,81 @@ section h2 {
   background: #a5b4fc;
   cursor: not-allowed;
 }
+
+/* Auth */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 1rem;
+}
+
+.auth-form {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-form h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.auth-form button[type="submit"] {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.65rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth-form button[type="submit"]:hover {
+  background: #4338ca;
+}
+
+.auth-form button[type="submit"]:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.auth-switch {
+  font-size: 0.88rem;
+  color: #555;
+  text-align: center;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #4f46e5;
+  cursor: pointer;
+  font-size: inherit;
+  font-weight: 600;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* Logout */
+.logout-btn {
+  margin-left: auto;
+  background: transparent !important;
+  color: #f87171 !important;
+  border-color: #f87171 !important;
+  font-size: 0.82rem !important;
+}
+
+.logout-btn:hover {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #991b1b !important;
+}

@@ -1,15 +1,16 @@
-export default function ListaReservas({ reservas, espacios }) {
+export default function ListaReservas({ reservas }) {
   if (!reservas.length)
     return <p className="empty">No hay reservas registradas.</p>;
-
-  const nombreEspacio = (id) =>
-    espacios.find((e) => e.id === id)?.nombre ?? `Espacio #${id}`;
 
   return (
     <ul className="card-list">
       {reservas.map((r) => (
-        <li key={r.id} className="card">
-          <h3>{nombreEspacio(r.espacioId)}</h3>
+        <li key={r._id} className="card">
+          <h3>{r.espacio?.nombre ?? `Espacio #${r.espacio}`}</h3>
+          <p>
+            <span className="label">Usuario:</span>{" "}
+            {r.usuario?.nombre ?? r.usuario?.email ?? r.usuario}
+          </p>
           <p>
             <span className="label">Fecha:</span> {r.fecha}
           </p>

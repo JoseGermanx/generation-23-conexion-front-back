@@ -5,13 +5,13 @@ export default function ListaEspacios({ espacios }) {
   return (
     <ul className="card-list">
       {espacios.map((e) => (
-        <li key={e.id} className="card">
+        <li key={e._id} className="card">
           <h3>{e.nombre}</h3>
           <p>
             <span className="label">Capacidad:</span> {e.capacidad} personas
           </p>
           <p>
-            <span className="label">Ubicación:</span> {e.ubicación}
+            <span className="label">Ubicación:</span> {e.ubicacion}
           </p>
           <span className={`badge ${e.disponibilidad ? "available" : "busy"}`}>
             {e.disponibilidad ? "Disponible" : "No disponible"}

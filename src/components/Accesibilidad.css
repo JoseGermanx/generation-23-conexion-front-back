@@ -1,0 +1,46 @@
+.a11y-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 50px;
+  background: #111;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.a11y-panel {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 250px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.a11y-panel button {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* efectos */
+.large-text {
+  font-size: 20px;
+}
+
+.high-contrast {
+  background: black;
+  color: yellow;
+}
+
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.underline-links a {
+  text-decoration: underline !important;
+}

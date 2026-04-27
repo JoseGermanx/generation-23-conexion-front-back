@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { crearReserva } from "../api";
+import { useAuth } from "../context/AuthContext";
 
 const hoy = () => {
   const d = new Date();
@@ -10,8 +11,9 @@ const hoy = () => {
 };
 
 export default function FormReserva({ espacios, onCreada }) {
+  const { state } = useAuth();
   const [form, setForm] = useState({
-    espacioId: "",
+    espacio: "",
     fecha: hoy(),
     horaInicio: "",
     horaFin: "",
@@ -31,10 +33,16 @@ export default function FormReserva({ espacios, onCreada }) {
     setSuccess("");
     setLoading(true);
     try {
-      const payload = { ...form, espacioId: Number(form.espacioId) };
+      const payload = {
+        usuario: state.usuario.id,
+        espacio: form.espacio,
+        fecha: form.fecha,
+        horaInicio: form.horaInicio,
+        horaFin: form.horaFin,
+      };
       const nueva = await crearReserva(payload);
-      setSuccess(`Reserva creada con éxito (ID: ${nueva.id})`);
-      setForm({ espacioId: "", fecha: hoy(), horaInicio: "", horaFin: "" });
+      setSuccess(`Reserva creada con éxito (ID: ${nueva._id})`);
+      setForm({ espacio: "", fecha: hoy(), horaInicio: "", horaFin: "" });
       onCreada();
     } catch (err) {
       setError(err.message);
@@ -47,10 +55,10 @@ export default function FormReserva({ espacios, onCreada }) {
     <form className="reserva-form" onSubmit={handleSubmit}>
       <div className="field">
         <label>Espacio</label>
-        <select name="espacioId" value={form.espacioId} onChange={handleChange} required>
+        <select name="espacio" value={form.espacio} onChange={handleChange} required>
           <option value="">-- Selecciona un espacio --</option>
           {espacios.map((e) => (
-            <option key={e.id} value={e.id}>
+            <option key={e._id} value={e._id}>
               {e.nombre}
             </option>
           ))}

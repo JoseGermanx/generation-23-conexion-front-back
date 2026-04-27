@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import { getEspacios, getReservas } from "./api";
+import { useAuth, AUTH_ACTIONS } from "./context/AuthContext";
 import ListaEspacios from "./components/ListaEspacios";
 import ListaReservas from "./components/ListaReservas";
 import FormReserva from "./components/FormReserva";
+import CalendarioReservas from "./components/CalendarioReservas";
+import Login from "./components/Login";
+import Registro from "./components/Registro";
+import AccessibilityMenu from "./components/Accesibilidad";
 import "./App.css";
 
 export default function App() {
+  const { state, dispatch } = useAuth();
+  const [vistaAuth, setVistaAuth] = useState("login"); // "login" | "registro"
+
   const [espacios, setEspacios] = useState([]);
   const [reservas, setReservas] = useState([]);
   const [tab, setTab] = useState("espacios");
@@ -15,26 +23,43 @@ export default function App() {
   const [errorReservas, setErrorReservas] = useState("");
 
   useEffect(() => {
+    if (!state.token) return;
+    setLoadingEspacios(true);
     getEspacios()
       .then(setEspacios)
       .catch((e) => setErrorEspacios(e.message))
       .finally(() => setLoadingEspacios(false));
-  }, []);
+  }, [state.token]);
 
   const cargarReservas = () => {
     setLoadingReservas(true);
-    getReservas()
+    getReservas(state.usuario.id)
       .then(setReservas)
       .catch((e) => setErrorReservas(e.message))
       .finally(() => setLoadingReservas(false));
   };
 
   useEffect(() => {
+    if (!state.token) return;
     cargarReservas();
-  }, []);
+  }, [state.token]);
+
+  if (!state.token) {
+    return (
+      <div className="app">
+        <AccessibilityMenu />
+        {vistaAuth === "login" ? (
+          <Login onIrARegistro={() => setVistaAuth("registro")} />
+        ) : (
+          <Registro onIrALogin={() => setVistaAuth("login")} />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="app">
+      <AccessibilityMenu />
       <header>
         <h1>Reserva de Espacios</h1>
         <nav>
@@ -51,10 +76,22 @@ export default function App() {
             Reservas
           </button>
           <button
+            className={tab === "calendario" ? "active" : ""}
+            onClick={() => setTab("calendario")}
+          >
+            Calendario
+          </button>
+          <button
             className={tab === "nueva" ? "active" : ""}
             onClick={() => setTab("nueva")}
           >
             Nueva reserva
+          </button>
+          <button
+            className="logout-btn"
+            onClick={() => dispatch({ type: AUTH_ACTIONS.LOGOUT })}
+          >
+            Cerrar sesión ({state.usuario?.email})
           </button>
         </nav>
       </header>
@@ -81,7 +118,20 @@ export default function App() {
             ) : errorReservas ? (
               <p className="msg error">{errorReservas}</p>
             ) : (
-              <ListaReservas reservas={reservas} espacios={espacios} />
+              <ListaReservas reservas={reservas} />
+            )}
+          </section>
+        )}
+
+        {tab === "calendario" && (
+          <section>
+            <h2>Calendario de reservas</h2>
+            {loadingReservas ? (
+              <p className="empty">Cargando...</p>
+            ) : errorReservas ? (
+              <p className="msg error">{errorReservas}</p>
+            ) : (
+              <CalendarioReservas reservas={reservas} espacios={espacios} />
             )}
           </section>
         )}

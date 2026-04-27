@@ -1,0 +1,191 @@
+.calendario {
+  max-width: 480px;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.calendario-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.calendario-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+
+.calendario-header button {
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+  color: inherit;
+}
+
+.calendario-header button:hover {
+  background-color: #f0f0f0;
+}
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.calendario-dia-nombre {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #888;
+  padding: 4px 0;
+}
+
+.calendario-celda {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.calendario-celda:hover {
+  background-color: #f0f0f0;
+}
+
+.calendario-celda.hoy .numero-dia {
+  background-color: #1a73e8;
+  color: #fff;
+  border-radius: 50%;
+  width: 1.6em;
+  height: 1.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendario-celda.tiene-reservas {
+  border-color: #1a73e8;
+  background-color: #e8f0fe;
+}
+
+.calendario-celda.tiene-reservas:hover {
+  background-color: #d2e3fc;
+}
+
+.calendario-celda.seleccionado {
+  background-color: #1a73e8;
+  border-color: #1a73e8;
+  color: #fff;
+}
+
+.calendario-celda.seleccionado .badge {
+  background-color: #fff;
+  color: #1a73e8;
+}
+
+.badge {
+  font-size: 0.65rem;
+  background-color: #1a73e8;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0 5px;
+  line-height: 1.5;
+  margin-top: 2px;
+}
+
+/* Panel de detalle */
+.calendario-detalle {
+  margin-top: 1.2rem;
+  padding: 1rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  background: #fafafa;
+}
+
+.calendario-detalle h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+}
+
+.detalle-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detalle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.875rem;
+}
+
+.detalle-espacio {
+  font-weight: 600;
+}
+
+.detalle-horario {
+  color: #555;
+  font-size: 0.8rem;
+}
+
+/* Título con indicador de mes sin reservas */
+.calendario-titulo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sin-reservas-mes {
+  font-size: 0.7rem;
+  color: #999;
+}
+
+/* Lista de todas las reservas */
+.todas-reservas {
+  margin-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+  padding-top: 1rem;
+}
+
+.todas-reservas h4 {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.todas-grupo {
+  margin-bottom: 1rem;
+}
+
+.todas-fecha {
+  margin: 0 0 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #1a73e8;
+}
