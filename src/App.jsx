@@ -5,6 +5,8 @@ import ListaEspacios from "./components/ListaEspacios";
 import ListaReservas from "./components/ListaReservas";
 import FormReserva from "./components/FormReserva";
 import CalendarioReservas from "./components/CalendarioReservas";
+import PasoPago from "./components/PasoPago";
+import PagoResultado from "./components/PagoResultado";
 import Login from "./components/Login";
 import Registro from "./components/Registro";
 import AccessibilityMenu from "./components/Accesibilidad";
@@ -17,6 +19,7 @@ export default function App() {
   const [espacios, setEspacios] = useState([]);
   const [reservas, setReservas] = useState([]);
   const [tab, setTab] = useState("espacios");
+  const [reservaPendientePago, setReservaPendientePago] = useState(null);
   const [loadingEspacios, setLoadingEspacios] = useState(true);
   const [loadingReservas, setLoadingReservas] = useState(true);
   const [errorEspacios, setErrorEspacios] = useState("");
@@ -42,6 +45,12 @@ export default function App() {
   useEffect(() => {
     if (!state.token) return;
     cargarReservas();
+  }, [state.token]);
+
+  useEffect(() => {
+    if (!state.token) return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("status")) setTab("resultado_pago");
   }, [state.token]);
 
   if (!state.token) {
@@ -141,9 +150,40 @@ export default function App() {
             <h2>Nueva reserva</h2>
             <FormReserva
               espacios={espacios}
-              onCreada={() => {
-                cargarReservas();
-                setTab("reservas");
+              onReservada={(reserva) => {
+                setReservaPendientePago(reserva);
+                setTab("pago");
+              }}
+            />
+          </section>
+        )}
+
+        {tab === "pago" && reservaPendientePago && (
+          <section>
+            <h2>Confirmar y pagar</h2>
+            <PasoPago
+              reserva={reservaPendientePago}
+              espacios={espacios}
+              onCancelar={() => {
+                setReservaPendientePago(null);
+                setTab("nueva");
+              }}
+            />
+          </section>
+        )}
+
+        {tab === "resultado_pago" && (
+          <section>
+            <h2>Resultado del pago</h2>
+            <PagoResultado
+              onVolver={(destino) => {
+                if (destino === "reservas") {
+                  cargarReservas();
+                  setTab("reservas");
+                } else {
+                  setReservaPendientePago(null);
+                  setTab("nueva");
+                }
               }}
             />
           </section>

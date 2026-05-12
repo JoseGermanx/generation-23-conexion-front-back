@@ -28,6 +28,7 @@ function authReducer(state, action) {
     case AUTH_ACTIONS.LOGOUT:
       localStorage.removeItem("token");
       localStorage.removeItem("usuario");
+      localStorage.removeItem("pagoPendiente");
       return { token: null, usuario: null };
     default:
       return state;

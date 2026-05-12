@@ -1,4 +1,4 @@
-const BASE_URL = import.meta.env.VITE_API_URL;
+export const BASE_URL = import.meta.env.VITE_API_URL;
 
 function getToken() {
   return localStorage.getItem("token");
@@ -63,5 +63,17 @@ export async function crearReserva(data) {
   });
   const json = await res.json();
   if (!res.ok) throw new Error(json.msg || "Error al crear reserva.");
+  return json;
+}
+
+// ── Pagos ─────────────────────────────────────────────────────────────────────
+
+export async function getPagoReserva(reservaId) {
+  const res = await fetch(`${BASE_URL}/pagos/reserva/${reservaId}`, {
+    headers: authHeaders(),
+  });
+  if (res.status === 404) return null;
+  const json = await res.json();
+  if (!res.ok) throw new Error(json.msg || "Error al consultar el pago.");
   return json;
 }

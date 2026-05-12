@@ -136,7 +136,7 @@ export default function CalendarioReservas({ reservas, espacios }) {
             <ul className="detalle-lista">
               {reservasDelDia.map((r) => (
                 <li key={r._id} className="detalle-item">
-                  <span className="detalle-espacio">{nombreEspacio(r.espacioId)}</span>
+                  <span className="detalle-espacio">{nombreEspacio(r.espacio)}</span>
                   <span className="detalle-horario">{r.horaInicio} – {r.horaFin}</span>
                 </li>
               ))}
@@ -158,7 +158,7 @@ export default function CalendarioReservas({ reservas, espacios }) {
                 <ul className="detalle-lista">
                   {lista.map((r) => (
                     <li key={r._id} className="detalle-item">
-                      <span className="detalle-espacio">{nombreEspacio(r.espacioId)}</span>
+                      <span className="detalle-espacio">{nombreEspacio(r.espacio)}</span>
                       <span className="detalle-horario">{r.horaInicio} – {r.horaFin}</span>
                     </li>
                   ))}

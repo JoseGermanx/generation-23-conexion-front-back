@@ -10,7 +10,7 @@ const hoy = () => {
   return `${dd}-${mm}-${yyyy}`;
 };
 
-export default function FormReserva({ espacios, onCreada }) {
+export default function FormReserva({ espacios, onReservada }) {
   const { state } = useAuth();
   const [form, setForm] = useState({
     espacio: "",
@@ -19,7 +19,6 @@ export default function FormReserva({ espacios, onCreada }) {
     horaFin: "",
   });
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
@@ -30,7 +29,6 @@ export default function FormReserva({ espacios, onCreada }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
     setLoading(true);
     try {
       const payload = {
@@ -41,11 +39,13 @@ export default function FormReserva({ espacios, onCreada }) {
         horaFin: form.horaFin,
       };
       const nueva = await crearReserva(payload);
-      setSuccess(`Reserva creada con éxito (ID: ${nueva._id})`);
-      setForm({ espacio: "", fecha: hoy(), horaInicio: "", horaFin: "" });
-      onCreada();
+      onReservada(nueva);
     } catch (err) {
-      setError(err.message);
+      if (err.message.includes("Ya existe una reserva")) {
+        setError("Ese horario ya está ocupado. Elige otro horario o espacio.");
+      } else {
+        setError(err.message);
+      }
     } finally {
       setLoading(false);
     }
@@ -102,7 +102,6 @@ export default function FormReserva({ espacios, onCreada }) {
       </div>
 
       {error && <p className="msg error">{error}</p>}
-      {success && <p className="msg success">{success}</p>}
 
       <button type="submit" disabled={loading}>
         {loading ? "Guardando..." : "Crear reserva"}

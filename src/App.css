@@ -289,3 +289,236 @@ section h2 {
   color: #991b1b !important;
   border-color: #991b1b !important;
 }
+
+/* ── PasoPago ─────────────────────────────────────────────────────────────── */
+
+.paso-pago {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 480px;
+}
+
+.paso-pago h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+  color: #1a1a2e;
+}
+
+.paso-pago-resumen {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.resumen-fila {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.resumen-fila:last-child {
+  border-bottom: none;
+}
+
+.resumen-label {
+  color: #64748b;
+}
+
+.resumen-valor {
+  font-weight: 500;
+  color: #1a1a2e;
+}
+
+.resumen-monto {
+  background: #f8fafc;
+}
+
+.resumen-monto .resumen-valor {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a2e;
+}
+
+.paso-pago-nota {
+  font-size: 0.82rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.paso-pago-acciones {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-pagar {
+  flex: 1;
+  padding: 0.7rem 1.25rem;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-pagar:hover {
+  background: #2d2d4e;
+}
+
+.btn-cancelar {
+  padding: 0.7rem 1.25rem;
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btn-cancelar:hover {
+  border-color: #94a3b8;
+  color: #1a1a2e;
+}
+
+/* ── PagoResultado ────────────────────────────────────────────────────────── */
+
+.pago-resultado {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 520px;
+  text-align: center;
+}
+
+.pago-resultado-icono {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0 auto 1rem;
+}
+
+.pago-resultado--exito .pago-resultado-icono {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.pago-resultado--fallo .pago-resultado-icono,
+.pago-resultado--error .pago-resultado-icono {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.pago-resultado h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a2e;
+}
+
+.pago-resultado > p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.pago-resultado-detalle {
+  text-align: left;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.detalle-fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid #f1f5f9;
+  gap: 1rem;
+}
+
+.detalle-fila:last-child {
+  border-bottom: none;
+}
+
+.detalle-fila span:first-child {
+  color: #64748b;
+  flex-shrink: 0;
+}
+
+.detalle-fila span:last-child {
+  font-weight: 500;
+  color: #1a1a2e;
+  text-align: right;
+  word-break: break-all;
+}
+
+.estado-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.estado-badge--ok {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.estado-badge--err {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.detalle-mono {
+  font-family: monospace;
+  font-size: 0.8rem !important;
+}
+
+.btn-primario {
+  padding: 0.7rem 1.75rem;
+  background: #1a1a2e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-primario:hover {
+  background: #2d2d4e;
+}
+
+.btn-secundario {
+  padding: 0.7rem 1.75rem;
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btn-secundario:hover {
+  border-color: #94a3b8;
+  color: #1a1a2e;
+}
